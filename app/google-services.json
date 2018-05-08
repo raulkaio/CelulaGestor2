@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "813870164170",
+    "firebase_url": "https://gestordecelulas.firebaseio.com",
+    "project_id": "gestordecelulas",
+    "storage_bucket": "gestordecelulas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813870164170:android:dadbef997af56fc3",
+        "android_client_info": {
+          "package_name": "br.com.raulkaio.celulagestor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "813870164170-m52g8fo1ethdmvfprons78q60bu2putq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.raulkaio.celulagestor",
+            "certificate_hash": "5c003fc3f345f1bd7373b477d28a568a503bcd49"
+          }
+        },
+        {
+          "client_id": "813870164170-0p5tgmjprbf2l8aeh0r11p6l7rl6goa1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACPCjI-GUOQIVpHkLNa2W1hbRUS9Cgqd0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "813870164170-0p5tgmjprbf2l8aeh0r11p6l7rl6goa1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
