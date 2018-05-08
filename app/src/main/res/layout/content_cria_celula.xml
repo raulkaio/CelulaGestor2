@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="br.com.raulkaio.celulagestor.Activity.CriaCelulaActivity"
+    tools:showIn="@layout/activity_cria_celula">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:id="@+id/ScrollView">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteY="8dp"
+            tools:layout_editor_absoluteX="8dp"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:srcCompat="@mipmap/ic_nome"
+                    android:layout_marginRight="3dp"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textInputNome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/editTextNome"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Nome da célula"/>
+
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewFrequencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Frequência que ocorre (em dias)"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="25dp"
+                android:textSize="17dp"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:srcCompat="@mipmap/ic_data"
+                    android:layout_marginRight="3dp"/>
+
+                <Spinner
+                    android:id="@+id/spinnerFrequencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:srcCompat="@mipmap/ic_observacoes"
+                    android:layout_marginRight="3dp"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textInputObservacoes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/editTextObservacoes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Observações (opcional)"
+                        android:ems="10"
+                        android:inputType="textMultiLine"/>
+
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

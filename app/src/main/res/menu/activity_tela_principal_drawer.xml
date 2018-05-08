@@ -1,35 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
-
-    <item android:title="Communicate">
+    <item android:title="Cadastro">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_criar_celula"
+                android:icon="@mipmap/ic_celula"
+                android:title="Cadastrar celula" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_criar_pessoa"
+                android:icon="@mipmap/ic_pessoa"
+                android:title="Cadastrar pessoa" />
+        </menu>
+    </item>
+
+    <item android:title="Relatórios">
+        <menu>
+            <item
+                android:id="@+id/nav_relatorios"
+                android:icon="@mipmap/ic_relatorio"
+                android:title="Relatorios" />
+        </menu>
+    </item>
+
+    <item android:title="Conta">
+        <menu>
+            <item
+                android:id="@+id/nav_perfil"
+                android:icon="@mipmap/ic_pessoa"
+                android:title="Perfil" />
+
+            <item
+                android:id="@+id/nav_sair"
+                android:icon="@mipmap/ic_batismo"
+                android:title="Sair" />
+        </menu>
+    </item>
+
+    <item android:title="Ajuda">
+        <menu>
+            <item
+                android:id="@+id/nav_ajuda"
+                android:icon="@mipmap/ic_ajuda"
+                android:title="Ajuda e sugestões"/>
         </menu>
     </item>
 

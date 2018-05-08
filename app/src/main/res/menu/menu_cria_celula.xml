@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_limpar_campos"
+        android:orderInCategory="100"
+        android:title="Limpar campos"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_cancelar_celula"
+        android:orderInCategory="1000"
+        android:title="Cancelar cadastro"
+        app:showAsAction="never" />
+</menu>

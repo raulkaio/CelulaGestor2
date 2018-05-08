@@ -7,7 +7,7 @@
     android:layout_margin="16dp"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="br.com.raulkaio.celulagestor.Activity.MainActivity">
+    tools:context="br.com.raulkaio.celulagestor.Activity.LoginActivity">
 
     <TextView
         android:layout_width="fill_parent"

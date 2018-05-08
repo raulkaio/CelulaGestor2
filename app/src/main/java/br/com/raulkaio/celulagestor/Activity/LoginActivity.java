@@ -19,7 +19,7 @@ import br.com.raulkaio.celulagestor.Classes.Usuario;
 import br.com.raulkaio.celulagestor.DAO.ConfiguracaoFirebase;
 import br.com.raulkaio.celulagestor.R;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth autenticacao;
     private EditText edtEmailLogin, edtSenhaLogin;
     private Button btnLogin;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
 
         if(usuarioLogado()){
-            Intent intentMinhaConta = new Intent (MainActivity.this, TelaPrincipal.class);
+            Intent intentMinhaConta = new Intent (LoginActivity.this, PrincipalActivity.class);
             startActivity(intentMinhaConta);
 
         } else {
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                         validarLogin();
 
                     } else {
-                        Toast.makeText(MainActivity.this, "Por favor, preencha os campos de e-mail e senha", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Por favor, preencha os campos de e-mail e senha", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -65,16 +65,16 @@ public class MainActivity extends AppCompatActivity {
 
                 if (task.isSuccessful()) {
                     abrirTelaAdministrador();
-                    Toast.makeText(MainActivity.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(MainActivity.this, "Usuário ou senha inválidos! Tente novamente.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Usuário ou senha inválidos! Tente novamente.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
     private void abrirTelaAdministrador() {
-        Intent intent = new Intent(MainActivity.this, TelaPrincipal.class);
+        Intent intent = new Intent(LoginActivity.this, PrincipalActivity.class);
         startActivity(intent);
         finish();
     }
@@ -86,9 +86,5 @@ public class MainActivity extends AppCompatActivity {
         } else{
             return false;
         }
-    }
-
-    public void abrirNovaActvity(Intent intent){
-        startActivity(intent);
     }
 }

@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import br.com.raulkaio.celulagestor.R;
 
-public class Splash extends AppCompatActivity implements Runnable {
+public class SplashActivity extends AppCompatActivity implements Runnable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class Splash extends AppCompatActivity implements Runnable {
     }
 
     public void run() {
-        startActivity(new Intent(Splash.this, MainActivity.class));
+        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
         finish();
     }
 }

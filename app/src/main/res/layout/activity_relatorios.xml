@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="br.com.raulkaio.celulagestor.Activity.PrincipalActivity"
-    tools:showIn="@layout/app_bar_tela_principal">
+    tools:context="br.com.raulkaio.celulagestor.Activity.RelatoriosActivity">
 
 </android.support.constraint.ConstraintLayout>
