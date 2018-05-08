@@ -30,12 +30,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        edtEmailLogin = (EditText) findViewById(R.id.edtEmail)
+        edtEmailLogin = (EditText) findViewById(R.id.edtEmail);
         edtSenhaLogin = (EditText) findViewById(R.id.edtSenha);
         btnLogin = (Button) findViewById(R.id.btnLogin);
 
         if(usuarioLogado()){
-            Intent intentMinhaConta = new Intent (MainActivity.this, PrincipalActivity.class);
+            Intent intentMinhaConta = new Intent (MainActivity.this, TelaPrincipal.class);
             startActivity(intentMinhaConta);
 
         } else {
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void abrirTelaAdministrador() {
-        Intent intent = new Intent(MainActivity.this, CadastroUsuarioActivity.class);
+        Intent intent = new Intent(MainActivity.this, TelaPrincipal.class);
         startActivity(intent);
         finish();
     }
