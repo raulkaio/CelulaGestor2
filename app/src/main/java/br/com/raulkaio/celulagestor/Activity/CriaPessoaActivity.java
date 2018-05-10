@@ -2,6 +2,8 @@ package br.com.raulkaio.celulagestor.Activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.provider.ContactsContract;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +14,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,6 +25,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import br.com.raulkaio.celulagestor.Classes.Celula;
+import br.com.raulkaio.celulagestor.Classes.Pessoa;
+import br.com.raulkaio.celulagestor.DAO.ConfiguracaoFirebase;
 import br.com.raulkaio.celulagestor.R;
 
 public class CriaPessoaActivity extends AppCompatActivity {
@@ -28,6 +37,9 @@ public class CriaPessoaActivity extends AppCompatActivity {
     private Switch swtEncontro, swtBatismo;
     private Calendar dataDeNascimento;
     private DatePickerDialog.OnDateSetListener data;
+    private Pessoa pessoa;
+    private FirebaseAuth autenticacao;
+    private DatabaseReference referencia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +53,39 @@ public class CriaPessoaActivity extends AppCompatActivity {
         preencheSpinnerGenero();
         preencheSpinnerClassificacao();
         dataDeNascimento();
+
+        FloatingActionButton fab_salvar_celula = (FloatingActionButton) findViewById(R.id.fab_salvar_pessoa);
+        fab_salvar_celula.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                edtNome = (EditText) findViewById(R.id.editTextNome);
+                spnGenero = (Spinner) findViewById(R.id.spinnerGenero);
+                spnClassificacao = (Spinner) findViewById(R.id.spinnerClassificacao);
+                swtEncontro = (Switch) findViewById(R.id.switchEncontroComDeus);
+                swtBatismo = (Switch) findViewById(R.id.switchBatismoNasAguas);
+                edtDataDeNascimento = (EditText) findViewById(R.id.editTextDataNascimento);
+                edtObservacoes = (EditText) findViewById(R.id.editTextObservacoes);
+
+                if (edtNome.getText().toString().equals("")){
+                    Toast.makeText(CriaPessoaActivity.this, "Por favor, preencha o campo Nome.", Toast.LENGTH_SHORT).show();
+                } else{
+                    pessoa = new Pessoa();
+                    pessoa.setNome(edtNome.getText().toString());
+                    pessoa.setGenero(spnGenero.getSelectedItem().toString());
+                    pessoa.setClassificacao(spnClassificacao.getSelectedItem().toString());
+                    pessoa.setEncontro(String.valueOf(swtEncontro.isChecked()));
+                    pessoa.setBatismo(String.valueOf(swtBatismo.isChecked()));
+                    pessoa.setDataDeNascimento(edtDataDeNascimento.getText().toString());
+                    pessoa.setObservacoes(edtObservacoes.getText().toString());
+
+                    autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
+                    pessoa.setEmail(autenticacao.getCurrentUser().getEmail().toString());
+
+                    cadastrarPessoa(pessoa);
+                }
+            }
+        });
 
     }
 
@@ -126,7 +171,7 @@ public class CriaPessoaActivity extends AppCompatActivity {
                 dataDeNascimento.set(Calendar.YEAR, year);
                 dataDeNascimento.set(Calendar.MONTH, monthOfYear);
                 dataDeNascimento.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
+                atualizarCampoDataDeNascimento();
             }
 
         };
@@ -143,9 +188,32 @@ public class CriaPessoaActivity extends AppCompatActivity {
         });
     }
 
-    private void updateLabel() {
+    private void atualizarCampoDataDeNascimento() {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         edtDataDeNascimento.setText(sdf.format(dataDeNascimento.getTime()));
+    }
+
+    private boolean cadastrarPessoa(Pessoa pessoa){
+        try {
+            autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
+            referencia = ConfiguracaoFirebase.getFirebase().child("Pessoa");
+
+            referencia.push().setValue(pessoa);
+
+            Toast.makeText(CriaPessoaActivity.this, "Tudo certo!\n" +
+                    "Pessoa cadastrada com sucesso :)", Toast.LENGTH_SHORT).show();
+
+            limparCampos();
+
+            return true;
+        } catch (Exception e){
+
+            Toast.makeText(CriaPessoaActivity.this, "Oops!\n" +
+                    "Houve algum problema na hora de cadastrar a pessoa..." +
+                    "Por favor, tente novamente mais tarde.", Toast.LENGTH_LONG).show();
+
+            return false;
+        }
     }
 }
