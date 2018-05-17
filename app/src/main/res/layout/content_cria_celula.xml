@@ -44,7 +44,8 @@
                         android:id="@+id/editTextNome"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Nome da célula"/>
+                        android:hint="Nome da célula"
+                        android:inputType="textCapWords"/>
 
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>

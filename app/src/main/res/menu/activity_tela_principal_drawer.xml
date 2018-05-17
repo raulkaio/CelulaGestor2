@@ -25,10 +25,6 @@
 
     <item android:title="Conta">
         <menu>
-            <item
-                android:id="@+id/nav_perfil"
-                android:icon="@mipmap/ic_pessoa"
-                android:title="Perfil" />
 
             <item
                 android:id="@+id/nav_sair"

@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,13 +20,31 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.raulkaio.celulagestor.Adapter.CelulaAdapter;
+import br.com.raulkaio.celulagestor.Classes.Celula;
 import br.com.raulkaio.celulagestor.R;
 
 public class PrincipalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth autenticacao;
+
+    /* Variáveis do RecyclerView */
+    private RecyclerView mRecyclerViewCelulas;
+    private CelulaAdapter adapter;
+    private List<Celula> celulas;
+    private DatabaseReference referencia;
+    private Celula todasCelulas;
+    private LinearLayoutManager mLayoutManagerTodasCelulas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +73,11 @@ public class PrincipalActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        /* RecyclerView de Células */
+        mRecyclerViewCelulas = (RecyclerView) findViewById(R.id.recyclerViewTodasAsCelulas);
+        carregarTodasCelulas();
+
     }
 
     @Override
@@ -136,5 +162,34 @@ public class PrincipalActivity extends AppCompatActivity
         Intent intent = new Intent(PrincipalActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void carregarTodasCelulas(){
+        mRecyclerViewCelulas.setHasFixedSize(true);
+        mLayoutManagerTodasCelulas = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mRecyclerViewCelulas.setLayoutManager(mLayoutManagerTodasCelulas);
+
+        celulas = new ArrayList<>();
+        referencia = FirebaseDatabase.getInstance().getReference();
+
+        referencia.child("Celula").orderByChild("nome").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    todasCelulas = postSnapshot.getValue(Celula.class);
+                    celulas.add(todasCelulas);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        adapter = new CelulaAdapter(celulas, this);
+
+        mRecyclerViewCelulas.setAdapter(adapter);
     }
 }

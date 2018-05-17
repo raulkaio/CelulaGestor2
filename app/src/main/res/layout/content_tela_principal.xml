@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="br.com.raulkaio.celulagestor.Activity.PrincipalActivity"
-    tools:showIn="@layout/app_bar_tela_principal">
+    tools:showIn="@layout/app_bar_tela_principal"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewTodasAsCelulas"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="horizontal">
+    </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>
