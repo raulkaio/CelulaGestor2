@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,11 +35,12 @@ import br.com.raulkaio.celulagestor.Classes.Celula;
 import br.com.raulkaio.celulagestor.R;
 
 public class PrincipalActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
 
     private FirebaseAuth autenticacao;
 
     /* Variáveis do RecyclerView */
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerViewCelulas;
     private CelulaAdapter adapter;
     private List<Celula> celulas;
@@ -75,6 +77,23 @@ public class PrincipalActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         /* RecyclerView de Células */
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
+                R.color.colorPrimaryDark,
+                R.color.colorPrimaryLight,
+                R.color.colorAccent);
+
+        mSwipeRefreshLayout.post(new Runnable() {
+
+            @Override
+            public void run() {
+
+                mSwipeRefreshLayout.setRefreshing(true);
+            }
+        });
+
         mRecyclerViewCelulas = (RecyclerView) findViewById(R.id.recyclerViewTodasAsCelulas);
         carregarTodasCelulas();
 
@@ -165,6 +184,7 @@ public class PrincipalActivity extends AppCompatActivity
     }
 
     private void carregarTodasCelulas(){
+        mSwipeRefreshLayout.setRefreshing(true);
         mRecyclerViewCelulas.setHasFixedSize(true);
         mLayoutManagerTodasCelulas = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerViewCelulas.setLayoutManager(mLayoutManagerTodasCelulas);
@@ -172,7 +192,7 @@ public class PrincipalActivity extends AppCompatActivity
         celulas = new ArrayList<>();
         referencia = FirebaseDatabase.getInstance().getReference();
 
-        referencia.child("Celula").orderByChild("nome").addValueEventListener(new ValueEventListener() {
+        referencia.child("Celula").orderByChild("email").equalTo(autenticacao.getCurrentUser().getEmail().toString()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
@@ -180,6 +200,7 @@ public class PrincipalActivity extends AppCompatActivity
                     celulas.add(todasCelulas);
                 }
                 adapter.notifyDataSetChanged();
+                mSwipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
@@ -187,9 +208,12 @@ public class PrincipalActivity extends AppCompatActivity
 
             }
         });
-
         adapter = new CelulaAdapter(celulas, this);
-
         mRecyclerViewCelulas.setAdapter(adapter);
+    }
+
+    @Override
+    public void onRefresh() {
+        carregarTodasCelulas();
     }
 }
