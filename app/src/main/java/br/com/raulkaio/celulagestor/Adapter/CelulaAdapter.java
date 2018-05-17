@@ -7,6 +7,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -84,6 +85,7 @@ public class CelulaAdapter extends RecyclerView.Adapter<CelulaAdapter.ViewHolder
         }
 
         holder.txtObservacoes.setText(item.getObservacoes());
+        holder.txtLetra.setText(item.getNome().substring(0, 1));
     }
 
     @Override
@@ -92,9 +94,7 @@ public class CelulaAdapter extends RecyclerView.Adapter<CelulaAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        protected TextView txtNomeCelula;
-        protected TextView txtFrequencia;
-        protected TextView txtObservacoes;
+        protected TextView txtNomeCelula, txtFrequencia, txtObservacoes, txtLetra;
         protected LinearLayout linearLayoutCelulas;
 
         public ViewHolder (View itemView){
@@ -104,6 +104,7 @@ public class CelulaAdapter extends RecyclerView.Adapter<CelulaAdapter.ViewHolder
             txtFrequencia = (TextView) itemView.findViewById(R.id.txtFrequencia);
             txtObservacoes = (TextView) itemView.findViewById(R.id.txtObservacoes);
             linearLayoutCelulas = (LinearLayout) itemView.findViewById(R.id.linearLayoutCelulas);
+            txtLetra = (TextView) itemView.findViewById(R.id.icon_text);
         }
 
     }

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:id="@+id/linearLayoutCelulas"
@@ -16,18 +17,55 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_casa_empty" />
+            <RelativeLayout
+                android:id="@+id/icon_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/icon_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_width_height"
+                        android:layout_height="@dimen/icon_width_height"
+                        android:src="@drawable/bg_circulo"
+                        android:tint="@color/colorAccent"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/icon_front"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/icon_profile"
+                        android:layout_width="@dimen/icon_width_height"
+                        android:layout_height="@dimen/icon_width_height" />
+
+                    <TextView
+                        android:id="@+id/icon_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/icon_text"
+                        android:fontFamily="sans-serif-light"/>
+                </RelativeLayout>
+
+            </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="0dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -35,25 +73,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nome da célula"
-                    android:textSize="20dp"/>
+                    android:textColor="@color/colorNome"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-light"/>
 
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="horizontal">-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/txtLabelFrequencia"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="Freq.: "/>-->
-
-                    <TextView
+                <TextView
                         android:id="@+id/txtFrequencia"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Frequência"/>
-                <!--</LinearLayout>-->
+                        android:text="Frequência"
+                        android:textColor="@color/colorFrequencia"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -64,13 +94,15 @@
                         android:id="@+id/txtLabelObservacoes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Obs.: "/>
+                        android:text="Obs.: "
+                        android:textColor="@color/colorObservacoes"/>
 
                     <TextView
                         android:id="@+id/txtObservacoes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Observações"/>
+                        android:text="Observações"
+                        android:textColor="@color/colorObservacoes"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -81,7 +113,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/grey"
+            android:background="@color/colorLinhaRecyclerView"
             />
 
 </LinearLayout>
