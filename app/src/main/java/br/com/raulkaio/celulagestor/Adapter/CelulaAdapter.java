@@ -61,8 +61,6 @@ public class CelulaAdapter extends RecyclerView.Adapter<CelulaAdapter.ViewHolder
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
                     todasCelulas = postSnapshot.getValue(Celula.class);
                     celulas.add(todasCelulas);
-
-                    DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
                 }
             }
 

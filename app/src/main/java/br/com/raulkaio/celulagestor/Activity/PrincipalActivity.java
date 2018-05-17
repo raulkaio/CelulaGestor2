@@ -143,9 +143,9 @@ public class PrincipalActivity extends AppCompatActivity
         } else if (id == R.id.nav_criar_pessoa) {
             Intent criarPessoa  = new Intent(PrincipalActivity.this, CriaPessoaActivity.class);
             startActivity(criarPessoa);
-        } else if (id == R.id.nav_relatorios) {
-            Intent relatorios  = new Intent(PrincipalActivity.this, RelatoriosActivity.class);
-            startActivity(relatorios);
+        } else if (id == R.id.nav_relatorio_todas_pessoas) {
+            Intent relatorioTodasPessoas  = new Intent(PrincipalActivity.this, RelatorioTodasPessoas.class);
+            startActivity(relatorioTodasPessoas);
         } else if (id == R.id.nav_sair) {
             deslogarUsuario();
         } else if (id == R.id.nav_ajuda) {

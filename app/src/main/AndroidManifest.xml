@@ -27,16 +27,17 @@
             android:label="Gestor de células"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activity.RelatoriosActivity"
-            android:label="Relatórios" />
-        <activity
             android:name=".Activity.CriaCelulaActivity"
             android:label="Cadastrar célula"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.CriaPessoaActivity"
             android:label="Cadastrar pessoa"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.RelatorioTodasPessoas"
+            android:label="@string/title_activity_relatorio_todas_pessoas"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

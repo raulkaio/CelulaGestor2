@@ -17,9 +17,9 @@
     <item android:title="Relatórios">
         <menu>
             <item
-                android:id="@+id/nav_relatorios"
+                android:id="@+id/nav_relatorio_todas_pessoas"
                 android:icon="@mipmap/ic_relatorio"
-                android:title="Relatorios" />
+                android:title="Listar todas as pessoas" />
         </menu>
     </item>
 
