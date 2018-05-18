@@ -26,11 +26,9 @@ dependencies {
     })
 
     /* Para utilizaçao do Firebase */
-    
 
     /* Imports do Firebase */
-    
-    
+
     /*Para utilizar recycler view na listagem de células*/
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'

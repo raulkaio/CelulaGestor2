@@ -88,7 +88,7 @@ public class CriaCelulaActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         /* Faz funcionar o botão Voltar na toolbar*/
-        if (id == R.id.home){
+        if (id == android.R.id.home){
             onBackPressed();
             return true;
         } else if (id == R.id.action_limpar_campos){

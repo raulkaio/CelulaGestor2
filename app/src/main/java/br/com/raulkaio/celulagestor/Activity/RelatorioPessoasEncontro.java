@@ -1,17 +1,14 @@
 package br.com.raulkaio.celulagestor.Activity;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -24,27 +21,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.raulkaio.celulagestor.Adapter.PessoaAdapter;
+import br.com.raulkaio.celulagestor.Adapter.RelatorioPessoasEncontroAdapter;
 import br.com.raulkaio.celulagestor.Classes.Pessoa;
 import br.com.raulkaio.celulagestor.R;
 
-public class RelatorioTodasPessoas extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener{
+public class RelatorioPessoasEncontro extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener{
 
     private FirebaseAuth autenticacao;
 
     /* Variáveis do RecyclerView */
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerViewPessoas;
-    private PessoaAdapter adapter;
+    private RelatorioPessoasEncontroAdapter adapter;
     private List<Pessoa> pessoas;
     private DatabaseReference referencia;
-    private Pessoa todasPessoas;
-    private LinearLayoutManager mLayoutManagerTodasPessoas;
+    private Pessoa pessoasEncontro;
+    private LinearLayoutManager mLayoutManagerPessoasEncontro;
+
+    public RelatorioPessoasEncontro() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_relatorio_todas_pessoas);
+        setContentView(R.layout.activity_relatorio_pessoas_encontro);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -68,8 +68,8 @@ public class RelatorioTodasPessoas extends AppCompatActivity
             }
         });
 
-        mRecyclerViewPessoas = (RecyclerView) findViewById(R.id.recyclerViewTodasAsPessoas);
-        carregarTodasPessoas();
+        mRecyclerViewPessoas = (RecyclerView) findViewById(R.id.recyclerViewPessoasEncontro);
+        carregarPessoasEncontro();
     }
 
     @Override
@@ -95,22 +95,23 @@ public class RelatorioTodasPessoas extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private void carregarTodasPessoas(){
+    private void carregarPessoasEncontro(){
         mSwipeRefreshLayout.setRefreshing(true);
         mRecyclerViewPessoas.setHasFixedSize(true);
-        mLayoutManagerTodasPessoas = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mRecyclerViewPessoas.setLayoutManager(mLayoutManagerTodasPessoas);
+        mLayoutManagerPessoasEncontro = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mRecyclerViewPessoas.setLayoutManager(mLayoutManagerPessoasEncontro);
 
         pessoas = new ArrayList<>();
         referencia = FirebaseDatabase.getInstance().getReference();
         autenticacao = FirebaseAuth.getInstance();
 
-        referencia.child("Pessoa").orderByChild("email").equalTo(autenticacao.getCurrentUser().getEmail().toString()).addValueEventListener(new ValueEventListener() {
+        String teste = autenticacao.getCurrentUser().getEmail().toString()+"_false";
+        referencia.child("Pessoa").orderByChild("email_encontro").equalTo(autenticacao.getCurrentUser().getEmail().toString()+"_false").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
-                    todasPessoas = postSnapshot.getValue(Pessoa.class);
-                    pessoas.add(todasPessoas);
+                    pessoasEncontro = postSnapshot.getValue(Pessoa.class);
+                    pessoas.add(pessoasEncontro);
                 }
                 adapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -121,7 +122,7 @@ public class RelatorioTodasPessoas extends AppCompatActivity
 
             }
         });
-        adapter = new PessoaAdapter(pessoas, this);
+        adapter = new RelatorioPessoasEncontroAdapter(pessoas, this);
         mRecyclerViewPessoas.setAdapter(adapter);
     }
 }

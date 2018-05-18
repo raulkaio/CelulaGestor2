@@ -1,17 +1,13 @@
 package br.com.raulkaio.celulagestor.Activity;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -23,30 +19,28 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.raulkaio.celulagestor.Adapter.PessoaAdapter;
+import br.com.raulkaio.celulagestor.Adapter.RelatorioPessoasBatismoAdapter;
+import br.com.raulkaio.celulagestor.Adapter.RelatorioPessoasEncontroAdapter;
 import br.com.raulkaio.celulagestor.Classes.Pessoa;
 import br.com.raulkaio.celulagestor.R;
 
-public class RelatorioTodasPessoas extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener{
+public class RelatorioPessoasBatismo extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener{
 
     private FirebaseAuth autenticacao;
 
     /* Variáveis do RecyclerView */
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerViewPessoas;
-    private PessoaAdapter adapter;
+    private RelatorioPessoasBatismoAdapter adapter;
     private List<Pessoa> pessoas;
     private DatabaseReference referencia;
-    private Pessoa todasPessoas;
-    private LinearLayoutManager mLayoutManagerTodasPessoas;
+    private Pessoa pessoasBatismo;
+    private LinearLayoutManager mLayoutManagerPessoasBatismo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_relatorio_todas_pessoas);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_relatorio_pessoas_batismo);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -68,8 +62,8 @@ public class RelatorioTodasPessoas extends AppCompatActivity
             }
         });
 
-        mRecyclerViewPessoas = (RecyclerView) findViewById(R.id.recyclerViewTodasAsPessoas);
-        carregarTodasPessoas();
+        mRecyclerViewPessoas = (RecyclerView) findViewById(R.id.recyclerViewPessoasBatismo);
+        carregarPessoasBatismo();
     }
 
     @Override
@@ -95,22 +89,24 @@ public class RelatorioTodasPessoas extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private void carregarTodasPessoas(){
+    private void carregarPessoasBatismo(){
         mSwipeRefreshLayout.setRefreshing(true);
         mRecyclerViewPessoas.setHasFixedSize(true);
-        mLayoutManagerTodasPessoas = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mRecyclerViewPessoas.setLayoutManager(mLayoutManagerTodasPessoas);
+        mLayoutManagerPessoasBatismo = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mRecyclerViewPessoas.setLayoutManager(mLayoutManagerPessoasBatismo);
 
         pessoas = new ArrayList<>();
         referencia = FirebaseDatabase.getInstance().getReference();
         autenticacao = FirebaseAuth.getInstance();
 
-        referencia.child("Pessoa").orderByChild("email").equalTo(autenticacao.getCurrentUser().getEmail().toString()).addValueEventListener(new ValueEventListener() {
+        String teste = autenticacao.getCurrentUser().getEmail().toString()+"_false";
+        referencia.child("Pessoa").orderByChild("email_batismo").equalTo(autenticacao.getCurrentUser().getEmail().toString()+"_false").addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
-                    todasPessoas = postSnapshot.getValue(Pessoa.class);
-                    pessoas.add(todasPessoas);
+                    pessoasBatismo = postSnapshot.getValue(Pessoa.class);
+                    pessoas.add(pessoasBatismo);
                 }
                 adapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -121,7 +117,7 @@ public class RelatorioTodasPessoas extends AppCompatActivity
 
             }
         });
-        adapter = new PessoaAdapter(pessoas, this);
+        adapter = new RelatorioPessoasBatismoAdapter(pessoas, this);
         mRecyclerViewPessoas.setAdapter(adapter);
     }
 }

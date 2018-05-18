@@ -20,6 +20,14 @@
                 android:id="@+id/nav_relatorio_todas_pessoas"
                 android:icon="@mipmap/ic_relatorio"
                 android:title="Listar todas as pessoas" />
+            <item
+                android:id="@+id/nav_relatorio_pessoas_encontro"
+                android:icon="@mipmap/ic_relatorio"
+                android:title="Convidar para Encontro com Deus" />
+            <item
+                android:id="@+id/nav_relatorio_pessoas_batismo"
+                android:icon="@mipmap/ic_relatorio"
+                android:title="Convidar para Batismo" />
         </menu>
     </item>
 

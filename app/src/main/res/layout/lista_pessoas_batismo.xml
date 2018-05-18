@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutPessoasBatismo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <RelativeLayout
+                android:id="@+id/icon_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/icon_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_width_height"
+                        android:layout_height="@dimen/icon_width_height"
+                        android:src="@drawable/bg_circulo"
+                        android:tint="@color/colorPrimaryDark"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/icon_front"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/icon_profile"
+                        android:layout_width="@dimen/icon_width_height"
+                        android:layout_height="@dimen/icon_width_height" />
+
+                    <TextView
+                        android:id="@+id/icon_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/icon_text"
+                        android:fontFamily="sans-serif-light"/>
+                </RelativeLayout>
+
+            </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="0dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtNomePessoa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nome da pessoa"
+                    android:textColor="@color/colorNome"/>
+
+                <TextView
+                        android:id="@+id/txtClassificacao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Classificação"
+                        android:textColor="@color/colorClassificacao"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtLabelBatismo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Batismo: "
+                        android:textColor="@color/colorObservacoes"/>
+
+                    <TextView
+                        android:id="@+id/txtBatismo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Batismo"
+                        android:textColor="@color/colorObservacoes"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/colorLinhaRecyclerView"
+            />
+
+</LinearLayout>

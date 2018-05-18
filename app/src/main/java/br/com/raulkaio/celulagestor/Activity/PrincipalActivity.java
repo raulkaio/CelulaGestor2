@@ -146,6 +146,12 @@ public class PrincipalActivity extends AppCompatActivity
         } else if (id == R.id.nav_relatorio_todas_pessoas) {
             Intent relatorioTodasPessoas  = new Intent(PrincipalActivity.this, RelatorioTodasPessoas.class);
             startActivity(relatorioTodasPessoas);
+        } else if (id == R.id.nav_relatorio_pessoas_encontro) {
+            Intent relatorioPessoasEncontro  = new Intent(PrincipalActivity.this, RelatorioPessoasEncontro.class);
+            startActivity(relatorioPessoasEncontro);
+        } else if (id == R.id.nav_relatorio_pessoas_batismo) {
+            Intent relatorioPessoasBatismo  = new Intent(PrincipalActivity.this, RelatorioPessoasBatismo.class);
+            startActivity(relatorioPessoasBatismo);
         } else if (id == R.id.nav_sair) {
             deslogarUsuario();
         } else if (id == R.id.nav_ajuda) {

@@ -2,10 +2,12 @@
     <string name="app_name">Gestor de células</string>
     <string name="title_activity_tela_principal">Gestor de células</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Abrir menu</string>
+    <string name="navigation_drawer_close">Fechar menu</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_cria_celula">CriaCelulaActivity</string>
-    <string name="title_activity_relatorio_todas_pessoas">RelatorioTodasPessoas</string>
+    <string name="action_settings">Configurações</string>
+    <string name="title_activity_cria_celula">Criando nova célula</string>
+    <string name="title_activity_relatorio_todas_pessoas">Listando todas as pessoas</string>
+    <string name="title_activity_relatorio_pessoas_encontro">Convidar para Encontro com Deus</string>
+    <string name="title_activity_relatorio_pessoas_batismo">Convidar para Batismo</string>
 </resources>
