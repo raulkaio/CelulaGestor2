@@ -5,12 +5,12 @@ package br.com.raulkaio.celulagestor.Classes;
  */
 
 public class Pessoa {
-    protected String email, nome, genero, classificacao, encontro, batismo, dataDeNascimento, observacoes;
+    protected String email, nome, genero, classificacao, encontro, batismo, dataDeNascimento, observacoes, keyEmailEncontro, keyEmailBatismo;
 
     public Pessoa() {
     }
 
-    public Pessoa(String email, String nome, String genero, String classificacao, String encontro, String batismo, String dataDeNascimento, String observacoes) {
+    public Pessoa(String email, String nome, String genero, String classificacao, String encontro, String batismo, String dataDeNascimento, String observacoes, String keyEmailEncontro, String keyEmailBatismo) {
         this.email = email;
         this.nome = nome;
         this.genero = genero;
@@ -19,6 +19,8 @@ public class Pessoa {
         this.batismo = batismo;
         this.dataDeNascimento = dataDeNascimento;
         this.observacoes = observacoes;
+        this.keyEmailEncontro = keyEmailEncontro;
+        this.keyEmailBatismo = keyEmailBatismo;
     }
 
     public String getEmail() {
@@ -83,5 +85,21 @@ public class Pessoa {
 
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
+    }
+
+    public String getKeyEmailEncontro() {
+        return keyEmailEncontro;
+    }
+
+    public void setKeyEmailEncontro(String keyEmailEncontro) {
+        this.keyEmailEncontro = keyEmailEncontro;
+    }
+
+    public String getKeyEmailBatismo() {
+        return keyEmailBatismo;
+    }
+
+    public void setKeyEmailBatismo(String keyEmailBatismo) {
+        this.keyEmailBatismo = keyEmailBatismo;
     }
 }

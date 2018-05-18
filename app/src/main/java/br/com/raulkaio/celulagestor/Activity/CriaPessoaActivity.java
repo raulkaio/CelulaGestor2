@@ -82,6 +82,9 @@ public class CriaPessoaActivity extends AppCompatActivity {
                     autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
                     pessoa.setEmail(autenticacao.getCurrentUser().getEmail().toString());
 
+                    pessoa.setKeyEmailEncontro(autenticacao.getCurrentUser().getEmail().toString()+"~"+String.valueOf(swtEncontro.isChecked()));
+                    pessoa.setKeyEmailBatismo(autenticacao.getCurrentUser().getEmail().toString()+"~"+String.valueOf(swtBatismo.isChecked()));
+
                     cadastrarPessoa(pessoa);
                 }
             }

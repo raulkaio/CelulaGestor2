@@ -1,13 +1,17 @@
 package br.com.raulkaio.celulagestor.Activity;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -20,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.raulkaio.celulagestor.Adapter.RelatorioPessoasBatismoAdapter;
-import br.com.raulkaio.celulagestor.Adapter.RelatorioPessoasEncontroAdapter;
 import br.com.raulkaio.celulagestor.Classes.Pessoa;
 import br.com.raulkaio.celulagestor.R;
 
@@ -41,6 +44,8 @@ public class RelatorioPessoasBatismo extends AppCompatActivity implements Naviga
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relatorio_pessoas_batismo);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -100,24 +105,27 @@ public class RelatorioPessoasBatismo extends AppCompatActivity implements Naviga
         autenticacao = FirebaseAuth.getInstance();
 
         String teste = autenticacao.getCurrentUser().getEmail().toString()+"_false";
-        referencia.child("Pessoa").orderByChild("email_batismo").equalTo(autenticacao.getCurrentUser().getEmail().toString()+"_false").addValueEventListener(new ValueEventListener() {
+        referencia.child("Pessoa")
+                .orderByChild("keyEmailEncontro")
+                .equalTo(autenticacao.getCurrentUser().getEmail().toString()+"~"+"false")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                            pessoasBatismo = postSnapshot.getValue(Pessoa.class);
+                            pessoas.add(pessoasBatismo);
+                        }
+                        adapter.notifyDataSetChanged();
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
 
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
-                    pessoasBatismo = postSnapshot.getValue(Pessoa.class);
-                    pessoas.add(pessoasBatismo);
-                }
-                adapter.notifyDataSetChanged();
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+                    }
+                });
         adapter = new RelatorioPessoasBatismoAdapter(pessoas, this);
         mRecyclerViewPessoas.setAdapter(adapter);
     }
+
 }

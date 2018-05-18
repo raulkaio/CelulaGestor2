@@ -106,7 +106,10 @@ public class RelatorioPessoasEncontro extends AppCompatActivity implements Navig
         autenticacao = FirebaseAuth.getInstance();
 
         String teste = autenticacao.getCurrentUser().getEmail().toString()+"_false";
-        referencia.child("Pessoa").orderByChild("email_encontro").equalTo(autenticacao.getCurrentUser().getEmail().toString()+"_false").addValueEventListener(new ValueEventListener() {
+        referencia.child("Pessoa")
+                .orderByChild("keyEmailEncontro")
+                .equalTo(autenticacao.getCurrentUser().getEmail().toString()+"~"+"false")
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){

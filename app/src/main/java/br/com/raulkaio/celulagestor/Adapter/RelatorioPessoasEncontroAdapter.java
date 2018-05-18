@@ -52,7 +52,10 @@ public class RelatorioPessoasEncontroAdapter extends RecyclerView.Adapter<Relato
         referenciaDatabase = FirebaseDatabase.getInstance().getReference();
         autenticacao = FirebaseAuth.getInstance();
         String teste = autenticacao.getCurrentUser().getEmail().toString()+"_false";
-        referenciaDatabase.child("Pessoa").orderByChild("email_encontro").equalTo(autenticacao.getCurrentUser().getEmail().toString()+"_false").addValueEventListener(new ValueEventListener() {
+        referenciaDatabase.child("Pessoa")
+                .orderByChild("keyEmailEncontro")
+                .equalTo(autenticacao.getCurrentUser().getEmail().toString()+"~"+"false")
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 pessoas.clear();
@@ -76,6 +79,12 @@ public class RelatorioPessoasEncontroAdapter extends RecyclerView.Adapter<Relato
         } else{
             holder.txtEncontro.setText("Não");
         }
+
+        if(item.getBatismo().toString().equals("true")){
+            holder.txtBatismo.setText("Sim");
+        } else{
+            holder.txtBatismo.setText("Não");
+        }
         
         holder.txtLetra.setText(item.getNome().substring(0, 1));
     }
@@ -86,7 +95,7 @@ public class RelatorioPessoasEncontroAdapter extends RecyclerView.Adapter<Relato
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        protected TextView txtNomePessoa, txtClassificacao, txtEncontro, txtLetra;
+        protected TextView txtNomePessoa, txtClassificacao, txtEncontro, txtBatismo, txtLetra;
         protected LinearLayout linearLayoutPessoas;
 
         public ViewHolder (View itemView){
@@ -95,6 +104,7 @@ public class RelatorioPessoasEncontroAdapter extends RecyclerView.Adapter<Relato
             txtNomePessoa = (TextView) itemView.findViewById(R.id.txtNomePessoa);
             txtClassificacao = (TextView) itemView.findViewById(R.id.txtClassificacao);
             txtEncontro = (TextView) itemView.findViewById(R.id.txtEncontro);
+            txtBatismo = (TextView) itemView.findViewById(R.id.txtBatismo);
             linearLayoutPessoas = (LinearLayout) itemView.findViewById(R.id.linearLayoutPessoasEncontro);
             txtLetra = (TextView) itemView.findViewById(R.id.icon_text);
         }

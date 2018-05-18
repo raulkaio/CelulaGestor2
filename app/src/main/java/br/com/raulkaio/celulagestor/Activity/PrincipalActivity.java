@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -124,12 +125,24 @@ public class PrincipalActivity extends AppCompatActivity
 //        int id = item.getItemId();
 //
 //        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
+//        if (id == R.id.homeAsUp) {
+//            finish();
+//            System.exit(0);
 //        }
 //
 //        return super.onOptionsItemSelected(item);
 //    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0) {
+            finish();
+            System.exit(0);
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
