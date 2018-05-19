@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         if(usuarioLogado()){
             Intent intentMinhaConta = new Intent (LoginActivity.this, PrincipalActivity.class);
             startActivity(intentMinhaConta);
+            finish();
 
         } else {
             btnLogin.setOnClickListener(new View.OnClickListener() {

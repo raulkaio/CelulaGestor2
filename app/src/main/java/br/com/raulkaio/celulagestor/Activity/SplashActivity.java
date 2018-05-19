@@ -5,6 +5,11 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.security.Principal;
+
 import br.com.raulkaio.celulagestor.R;
 
 public class SplashActivity extends AppCompatActivity implements Runnable {

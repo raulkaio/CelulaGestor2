@@ -3,6 +3,7 @@ package br.com.raulkaio.celulagestor.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -20,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -98,50 +100,6 @@ public class PrincipalActivity extends AppCompatActivity
         mRecyclerViewCelulas = (RecyclerView) findViewById(R.id.recyclerViewTodasAsCelulas);
         carregarTodasCelulas();
 
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        //getMenuInflater().inflate(R.menu.tela_principal, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.homeAsUp) {
-//            finish();
-//            System.exit(0);
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK
-                && event.getRepeatCount() == 0) {
-            finish();
-            System.exit(0);
-            return false;
-        }
-        return super.onKeyDown(keyCode, event);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -234,5 +192,27 @@ public class PrincipalActivity extends AppCompatActivity
     @Override
     public void onRefresh() {
         carregarTodasCelulas();
+    }
+
+    private Boolean exit = false;
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder construtorAlerta;
+        construtorAlerta = new AlertDialog.Builder(this);
+        construtorAlerta.setTitle("Sair");
+        construtorAlerta.setMessage("Deseja mesamo sair?");
+        construtorAlerta.setPositiveButton("NÃO, QUERO FICAR", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i){
+            }
+        });
+        construtorAlerta.setNegativeButton("SAIR", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i){
+                finish();
+            }
+        });
+        AlertDialog meuAlerta = construtorAlerta.create();
+        meuAlerta.show();
     }
 }
