@@ -1,13 +1,12 @@
 package br.com.raulkaio.celulagestor.Adapter;
 
 import android.content.Context;
-import android.provider.ContactsContract;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.raulkaio.celulagestor.Activity.CelulaActivity;
 import br.com.raulkaio.celulagestor.Classes.Celula;
 import br.com.raulkaio.celulagestor.R;
 
@@ -95,14 +95,22 @@ public class CelulaAdapter extends RecyclerView.Adapter<CelulaAdapter.ViewHolder
         protected TextView txtNomeCelula, txtFrequencia, txtObservacoes, txtLetra;
         protected LinearLayout linearLayoutCelulas;
 
-        public ViewHolder (View itemView){
+        public ViewHolder (final View itemView){
             super (itemView);
-
             txtNomeCelula = (TextView) itemView.findViewById(R.id.txtNomeCelula);
             txtFrequencia = (TextView) itemView.findViewById(R.id.txtFrequencia);
             txtObservacoes = (TextView) itemView.findViewById(R.id.txtObservacoes);
             linearLayoutCelulas = (LinearLayout) itemView.findViewById(R.id.linearLayoutCelulas);
             txtLetra = (TextView) itemView.findViewById(R.id.icon_text);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = v.getContext();
+                    Intent intent = new Intent(context, CelulaActivity.class);
+                    context.startActivity(intent);
+                }
+            });
         }
 
     }

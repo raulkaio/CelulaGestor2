@@ -1,7 +1,10 @@
 package br.com.raulkaio.celulagestor.Activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -21,6 +24,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,6 +34,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +65,20 @@ public class PrincipalActivity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        /* Testa de há conexão com a internet *//*
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            TextView textViewAlertaConexao = (TextView) findViewById(R.id.textViewAlertaConexao);
+            textViewAlertaConexao.setText("Sem conexão com a internet...");
+        } else {
+            LinearLayout linearLayoutAlertaConexao = (LinearLayout) findViewById(R.id.linearLayoutAlertaConexao);
+            linearLayoutAlertaConexao.setVisibility(0);
+        }
+        *//**/
 
         autenticacao = FirebaseAuth.getInstance();
 
@@ -93,13 +114,12 @@ public class PrincipalActivity extends AppCompatActivity
             @Override
             public void run() {
 
-                mSwipeRefreshLayout.setRefreshing(true);
+                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
 
         mRecyclerViewCelulas = (RecyclerView) findViewById(R.id.recyclerViewTodasAsCelulas);
         carregarTodasCelulas();
-
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -161,7 +181,7 @@ public class PrincipalActivity extends AppCompatActivity
     }
 
     private void carregarTodasCelulas(){
-        mSwipeRefreshLayout.setRefreshing(true);
+        mSwipeRefreshLayout.setRefreshing(false);
         mRecyclerViewCelulas.setHasFixedSize(true);
         mLayoutManagerTodasCelulas = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerViewCelulas.setLayoutManager(mLayoutManagerTodasCelulas);
@@ -176,8 +196,18 @@ public class PrincipalActivity extends AppCompatActivity
                     todasCelulas = postSnapshot.getValue(Celula.class);
                     celulas.add(todasCelulas);
                 }
-                adapter.notifyDataSetChanged();
-                mSwipeRefreshLayout.setRefreshing(false);
+
+                LinearLayout linearLayoutCelulasEmptyState = (LinearLayout) findViewById(R.id.linearLayoutCelulasEmptyState);
+
+                if(celulas.size() == 0){
+                    mRecyclerViewCelulas.setVisibility(View.INVISIBLE);
+                    linearLayoutCelulasEmptyState.setVisibility(View.VISIBLE);
+                } else {
+                    mRecyclerViewCelulas.setVisibility(View.VISIBLE);
+                    linearLayoutCelulasEmptyState.setVisibility(View.INVISIBLE);
+                    adapter.notifyDataSetChanged();
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
             }
 
             @Override

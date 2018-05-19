@@ -5,11 +5,12 @@
     <color name="colorPrimaryLight">#00b8ce</color>
     <color name="colorAccent">#F26C20</color>
     <color name="colorCancel">#858585</color>
-    <color name="colorLinhaRecyclerView">#ededed</color>
+    <color name="colorLinhaRecyclerView">#b7b7b7</color>
     <color name="colorNome">#000000</color>
     <color name="colorFrequencia">#7a7a7a</color>
     <color name="colorObservacoes">#7a7a7a</color>
     <color name="colorClassificacao">#7a7a7a</color>
     <color name="colorEncontro">#7a7a7a</color>
     <color name="colorBatismo">#7a7a7a</color>
+    <color name="colorAlerta">#EA4335</color>
 </resources>

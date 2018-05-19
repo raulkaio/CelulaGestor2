@@ -45,7 +45,11 @@
         <activity
             android:name=".Activity.RelatorioPessoasBatismo"
             android:label="@string/title_activity_relatorio_pessoas_batismo"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.CelulaActivity"
+            android:label="@string/title_activity_celula"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

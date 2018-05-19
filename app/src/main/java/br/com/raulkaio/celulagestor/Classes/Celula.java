@@ -6,6 +6,7 @@ package br.com.raulkaio.celulagestor.Classes;
 
 public class Celula {
     protected String email, nome, frequencia, horario, observacoes;
+    protected Pessoa[] pessoa;
 
     public Celula() {
     }

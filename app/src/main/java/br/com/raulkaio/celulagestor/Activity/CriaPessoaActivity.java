@@ -200,9 +200,9 @@ public class CriaPessoaActivity extends AppCompatActivity {
     private boolean cadastrarPessoa(Pessoa pessoa){
         try {
             autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
-            referencia = ConfiguracaoFirebase.getFirebase().child("Pessoa");
+            referencia = ConfiguracaoFirebase.getFirebase();
 
-            referencia.push().setValue(pessoa);
+            referencia.child("Celula").child("-LBxNWDjxkRBpahCoWQW").child("Pessoas").push().setValue(pessoa);
 
             Toast.makeText(CriaPessoaActivity.this, "Tudo certo!\n" +
                     "Pessoa cadastrada com sucesso :)", Toast.LENGTH_SHORT).show();
