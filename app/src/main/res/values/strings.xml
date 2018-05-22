@@ -11,7 +11,9 @@
     <string name="title_activity_relatorio_pessoas_encontro">Convidar para Encontro com Deus</string>
     <string name="title_activity_relatorio_pessoas_batismo">Convidar para Batismo</string>
     <string name="title_activity_celula">Detalhes</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_celula_aba1">Celula</string>
+    <string name="title_activity_celula_aba2">Pessoas</string>
+    <string name="title_activity_celula_aba3">Reuniões</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

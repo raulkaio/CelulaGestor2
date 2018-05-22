@@ -35,18 +35,6 @@
             android:label="Cadastrar pessoa"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activity.RelatorioTodasPessoas"
-            android:label="@string/title_activity_relatorio_todas_pessoas"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Activity.RelatorioPessoasEncontro"
-            android:label="@string/title_activity_relatorio_pessoas_encontro"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Activity.RelatorioPessoasBatismo"
-            android:label="@string/title_activity_relatorio_pessoas_batismo"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".Activity.CelulaActivity"
             android:label="@string/title_activity_celula"
             android:theme="@style/AppTheme.NoActionBar" />

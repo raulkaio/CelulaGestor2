@@ -202,7 +202,7 @@ public class CriaPessoaActivity extends AppCompatActivity {
             autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
             referencia = ConfiguracaoFirebase.getFirebase();
 
-            referencia.child("Celula").child("-LBxNWDjxkRBpahCoWQW").child("Pessoas").push().setValue(pessoa);
+            referencia.child("Celula").child("-LCujklSFcoHTyZxIclX").child("Pessoa").push().setValue(pessoa);
 
             Toast.makeText(CriaPessoaActivity.this, "Tudo certo!\n" +
                     "Pessoa cadastrada com sucesso :)", Toast.LENGTH_SHORT).show();

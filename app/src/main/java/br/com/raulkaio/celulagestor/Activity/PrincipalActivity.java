@@ -50,7 +50,6 @@ public class PrincipalActivity extends AppCompatActivity
     private FirebaseAuth autenticacao;
 
     /* Variáveis do RecyclerView */
-    private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerViewCelulas;
     private CelulaAdapter adapter;
     private List<Celula> celulas;
@@ -101,23 +100,6 @@ public class PrincipalActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         /* RecyclerView de Células */
-
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
-                R.color.colorPrimaryDark,
-                R.color.colorPrimaryLight,
-                R.color.colorAccent);
-
-        mSwipeRefreshLayout.post(new Runnable() {
-
-            @Override
-            public void run() {
-
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        });
-
         mRecyclerViewCelulas = (RecyclerView) findViewById(R.id.recyclerViewTodasAsCelulas);
         carregarTodasCelulas();
     }
@@ -128,22 +110,7 @@ public class PrincipalActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_criar_celula) {
-            Intent criarCelula  = new Intent(PrincipalActivity.this, CriaCelulaActivity.class);
-            startActivity(criarCelula);
-        } else if (id == R.id.nav_criar_pessoa) {
-            Intent criarPessoa  = new Intent(PrincipalActivity.this, CriaPessoaActivity.class);
-            startActivity(criarPessoa);
-        } else if (id == R.id.nav_relatorio_todas_pessoas) {
-            Intent relatorioTodasPessoas  = new Intent(PrincipalActivity.this, RelatorioTodasPessoas.class);
-            startActivity(relatorioTodasPessoas);
-        } else if (id == R.id.nav_relatorio_pessoas_encontro) {
-            Intent relatorioPessoasEncontro  = new Intent(PrincipalActivity.this, RelatorioPessoasEncontro.class);
-            startActivity(relatorioPessoasEncontro);
-        } else if (id == R.id.nav_relatorio_pessoas_batismo) {
-            Intent relatorioPessoasBatismo  = new Intent(PrincipalActivity.this, RelatorioPessoasBatismo.class);
-            startActivity(relatorioPessoasBatismo);
-        } else if (id == R.id.nav_sair) {
+        if (id == R.id.nav_sair) {
             deslogarUsuario();
         } else if (id == R.id.nav_ajuda) {
             emitirAlertaDeajuda();
@@ -181,7 +148,6 @@ public class PrincipalActivity extends AppCompatActivity
     }
 
     private void carregarTodasCelulas(){
-        mSwipeRefreshLayout.setRefreshing(false);
         mRecyclerViewCelulas.setHasFixedSize(true);
         mLayoutManagerTodasCelulas = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerViewCelulas.setLayoutManager(mLayoutManagerTodasCelulas);
@@ -206,7 +172,6 @@ public class PrincipalActivity extends AppCompatActivity
                     mRecyclerViewCelulas.setVisibility(View.VISIBLE);
                     linearLayoutCelulasEmptyState.setVisibility(View.INVISIBLE);
                     adapter.notifyDataSetChanged();
-                    mSwipeRefreshLayout.setRefreshing(false);
                 }
             }
 

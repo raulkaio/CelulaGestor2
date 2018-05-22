@@ -1,36 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Cadastro">
-        <menu>
-            <item
-                android:id="@+id/nav_criar_celula"
-                android:icon="@mipmap/ic_celula"
-                android:title="Cadastrar celula" />
-            <item
-                android:id="@+id/nav_criar_pessoa"
-                android:icon="@mipmap/ic_pessoa"
-                android:title="Cadastrar pessoa" />
-        </menu>
-    </item>
-
-    <item android:title="Relatórios">
-        <menu>
-            <item
-                android:id="@+id/nav_relatorio_todas_pessoas"
-                android:icon="@mipmap/ic_relatorio"
-                android:title="Listar todas as pessoas" />
-            <item
-                android:id="@+id/nav_relatorio_pessoas_encontro"
-                android:icon="@mipmap/ic_relatorio"
-                android:title="Convidar para Encontro com Deus" />
-            <item
-                android:id="@+id/nav_relatorio_pessoas_batismo"
-                android:icon="@mipmap/ic_relatorio"
-                android:title="Convidar para Batismo" />
-        </menu>
-    </item>
-
     <item android:title="Conta">
         <menu>
 
